@@ -1,0 +1,206 @@
+
+[{
+    "layer": "top",
+    "output": ["eDP-1","eDP-2"],
+    "height": 30, // Waybar height (to be removed for auto height)
+    "margin-top": 6,
+    "margin-left": 10,
+    "margin-bottom": 0,
+    "margin-right": 10,
+    "spacing": 5, // Gaps between modules (4px)
+    "modules-left": ["custom/launcher", "wlr/workspaces", "hyprland/submap"],
+    "modules-center": [],
+    "modules-right": ["tray", "idle_inhibitor", "backlight", "pulseaudio", "bluetooth", "network", "battery", "clock", "custom/power-menu"],
+    "wlr/workspaces": {
+      "format": "{icon}",
+      "on-click": "activate",
+      "all-outputs": true,
+      "sort-by-number": true,
+      "format-icons": {
+        "1": "",
+        "2": "",
+        "3": "",
+        "4": "",
+        "5": "",
+        "urgent": "",
+        "active": "",
+        "default": ""
+      }
+    },
+    "hyprland/window": {
+        "format": "{}",
+	"separate-outputs": true,
+	"max-length": 50
+    },
+    "hyprland/submap": {
+    "format": "{}",
+    "max-length": 8,
+    "tooltip": false
+    },
+    "tray": {
+	"icon-size": 21,
+        "spacing": 10
+    },
+    "clock": {
+        "format-alt": "<span color='#bf616a'> </span>{:%a %b %d}",
+        "format": "<span color='#bf616a'> </span>{:%I:%M %p}",
+        "tooltip-format": "<big>{:%B %Y}</big>\n<tt><small>{calendar}</small></tt>",
+    },
+    "backlight": {
+        "device": "amdgpu_bl1",
+        "format": "{icon} {percent}%",
+        "format-icons": ["", "", "", "", "", "", "", "", ""],
+        "on-scroll-up": "light -A 5",
+	"on-scroll-down": "light -U 5"
+    },
+    "network": {
+        "format-wifi": "直 {essid} {signalStrength}%",
+        "format-ethernet": " wired",
+        "format-disconnected": "睊",
+        "on-click": "gamemoderun networkmanager_dmenu",
+        "format-disconnected": "Disconnected  ",
+	"exec-on-event": true,
+        "tooltip": false
+    },
+
+    "bluetooth": {
+        "on-click": "gamemoderun ~/.config/rofi/bin/bluetooth",
+        "format": " {status}",
+	"exec-on-event": true,
+        "tooltip": false
+    },
+    "pulseaudio": {
+        "format": "<span foreground='#928374'>{icon}</span> {volume}%  {format_source}",
+        "format-bluetooth": "<span foreground='#928374'>{icon}</span> {volume}%   {format_source}",
+        "format-bluetooth-muted": "<span foreground='#928374'> {icon}</span>   {format_source}",
+        "format-muted": "<span foreground='#928374'></span>   {format_source}",
+        "format-source": "<span foreground='#928374'></span> {volume}%",
+        "format-source-muted": "<span foreground='#928374'></span>",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        },
+        "on-click": "pavucontrol",
+        "on-click-right": "amixer set Master mute"
+    },
+    "mpris": {
+	"format": "DEFAULT: {player_icon} {dynamic}",
+	"format-paused": "DEFAULT: {status_icon} <i>{dynamic}</i>",
+	"player-icons": {
+		"default": "▶",
+		"mpv": "🎵"
+	},
+	"status-icons": {
+		"paused": "⏸"
+	},
+	// "ignored-players": ["firefox"]
+},
+    "battery": {
+      "bat": "BAT0",
+      "adapter": "ADP0",
+      "interval": 60,
+      "states": {
+          "warning": 30,
+          "critical": 15
+      },
+      "max-length": 20,
+      "format": "{icon} {capacity}%",
+      "format-warning": "{icon} {capacity}%",
+      "format-critical": "{icon} {capacity}%",
+      "format-charging": "<span font-family='Font Awesome 6 Free'></span> {capacity}%",
+      "format-plugged": " {capacity}%",
+      "format-alt": "{icon} {time}",
+      "format-full": " {capacity}%",
+      "format-icons": ["" , "", "", "", ""],
+    },
+    "custom/power-menu": {
+        "format": " ⏻ ",
+        "on-click": "gamemoderun ~/.config/rofi/bin/powermenu",
+	"exec-on-event": true,
+        "tooltip": false
+    }, 
+    "custom/launcher": {
+        "format": " <span color='#6a92d7'> </span>",
+        "on-click": "gamemoderun ~/.config/rofi/bin/launcher",
+	"exec-on-event": true,
+        "tooltip": false
+    },
+    "custom/clipboard": {
+    	"format":"",
+	"on-click": "gamemoderun ~/.config/rofi/bin/clipboard",
+	"exec-on-event": true,
+	"tooltip": false
+    },
+    "custom/ppd": {
+        "format":" {}",
+	"exec": "powerprofilesctl get",
+        "on-click": "gamemoderun ~/.config/rofi/bin/powerprofiles",
+        "exec-on-event": true,
+        "tooltip": false,
+	"interval": 5
+    },
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+           "activated": "",
+           "deactivated": ""
+    },
+    "wlr/taskbar": {
+    "format": "{icon}",
+    "icon-size": 21,
+    "icon-theme": "Papirus-Dark",
+    "tooltip-format": "{title}",
+    "on-click": "minimize-raise",
+    "on-click-middle": "minimize",
+    "ignore-list": [
+       "Alacritty"
+    ],
+    "app_ids-mapping": {
+      "firefoxdeveloperedition": "firefox-developer-edition"
+    }
+  },
+}
+}, {
+    "layer": "top",
+    "output": "HDMI-A-1",
+    "height": 30, // Waybar height (to be removed for auto height)
+    "margin-top": 6,
+    "margin-left": 10,
+    "margin-bottom": 0,
+    "margin-right": 10,
+    "spacing": 5, // Gaps between modules (4px)
+    "modules-left": ["wlr/workspaces"],
+    "modules-center": [],
+    "modules-right": ["clock","custom/power-menu"],
+    
+    "wlr/workspaces": {
+      "format": "{icon}",
+      "on-click": "activate",
+      "all-outputs": true,
+      "format-icons": {
+        "1": "",
+        "2": "",
+        "3": "",
+        "4": "",
+        "5": "",
+        "urgent": "",
+        "active": "",
+        "default": ""
+      }
+    },    
+
+    "clock": {
+        "format-alt": "<span color='#bf616a'> </span>{:%a %b %d}",
+        "format": "<span color='#bf616a'> </span>{:%I:%M %p}",
+        "tooltip-format": "<big>{:%B %Y}</big>\n<tt><small>{calendar}</small></tt>",
+    },
+    "custom/power-menu": {
+        "format": " ⏻ ",
+        "on-click": "~/.config/rofi/bin/powermenu",
+    },
+}]
