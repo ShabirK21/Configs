@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+entries="performance balanced power-saver"
+
+selected=$(printf '%s\n' $entries | rofi -dmenu -theme ~/.config/rofi/config/powerprofiles.rasi | awk '{print tolower($1)}')
+
+case $selected in
+  performance)
+    powerprofilesctl set performance;;
+  balanced)
+    powerprofilesctl set balanced;;
+  power-saver)
+    powerprofilesctl set power-saver;;
+esac
