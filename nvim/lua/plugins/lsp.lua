@@ -62,7 +62,7 @@ return {
         clangd = function(_, opts)
           opts.capabilities.offsetEncoding = { "utf-16" }
         end,
-        -- example to setup with typescript.nvim
+
         -- tsserver = function(_, opts)
         --   require("typescript").setup({ server = opts })
         --   return true
@@ -161,7 +161,6 @@ return {
   },
   -- Mason
   {
-
     "williamboman/mason.nvim",
     cmd = "Mason",
     keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },

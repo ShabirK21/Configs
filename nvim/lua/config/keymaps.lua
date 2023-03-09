@@ -8,6 +8,7 @@ keyMap("i", "<C-z>", "<cmd>undo<cr>")
 
 -- Close buffer
 keyMap("n", "<C-x>", "<cmd>Bdelete<CR>")
+keyMap("i", "<C-x>", "<cmd>Bdelete<CR>")
 
 -- Telescope
 local builtin = require("telescope.builtin")

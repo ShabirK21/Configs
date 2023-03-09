@@ -21,7 +21,7 @@ vim.api.nvim_create_autocmd("User", {
     local fallback_on_empty = fallback_name == "" and fallback_ft == ""
 
     if fallback_on_empty then
-      vim.cmd("Dashboard")
+      vim.cmd("Alpha")
     end
   end,
 })

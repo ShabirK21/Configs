@@ -2,7 +2,7 @@ return {
   -- Clipboard manager
   {
     "AckslD/nvim-neoclip.lua",
-    event = "VeryLazy",
+    lazy = true,
     dependencies = { "nvim-telescope/telescope.nvim" },
     config = function()
       require("neoclip").setup()
@@ -52,4 +52,14 @@ return {
     "folke/neodev.nvim",
     opts = { experimental = { pathStrict = true }, library = { plugins = { "nvim-dap-ui" }, types = true } },
   },
+  {
+    "akinsho/bufferline.nvim",
+
+    opts = {
+      options = {
+        separator_style = "slant",
+      },
+    },
+  },
+  { "kdheepak/lazygit.nvim" },
 }
