@@ -1,30 +1,22 @@
 -- Keymaps are automatically loaded on the VeryLazy event
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
-local keyMap = vim.keymap.set
 
--- Undo
-keyMap("i", "<C-z>", "<cmd>undo<cr>")
+local function map(mode, lhs, rhs, opts)
+  local keys = require("lazy.core.handler").handlers.keys
+  ---@cast keys LazyKeysHandler
+  -- do not create the keymap if a lazy keys handler exists
+  if not keys.active[keys.parse({ lhs, mode = mode }).id] then
+    opts = opts or {}
+    opts.silent = opts.silent ~= false
+    vim.keymap.set(mode, lhs, rhs, opts)
+  end
+end
 
--- Close buffer
-keyMap("n", "<C-x>", "<cmd>Bdelete<CR>")
-keyMap("i", "<C-x>", "<cmd>Bdelete<CR>")
+map("n", "<C-x>", "<cmd>lua require('bufdelete').bufdelete(0, true)<cr>", { desc = "Close buffer" })
+map("n", "<C-a>", "<cmd>:ToggleTerm<CR>", { desc = "Toggle terminal" })
+map("t", "<C-a>", "<cmd>:ToggleTerm<CR>", { desc = "Toggle terminal" })
 
--- Telescope
-local builtin = require("telescope.builtin")
-vim.keymap.set("n", "<leader>ff", function()
-  builtin.find_files({ hidden = true, no_ignore = true, cwd = vim.fn.expand("$HOME") })
-end)
-vim.keymap.set("n", "<leader>fd", builtin.find_files, {})
-vim.keymap.set("n", "<leader>fs", function()
-  builtin.grep_string({ search = vim.fn.input("Grep > ") })
-end)
-
--- Bufferline
-keyMap("n", "<leader>[", "<cmd>BufferLineCyclePrev<cr>")
-keyMap("n", "<leader>]", "<cmd>BufferLineCycleNext<cr>")
-
--- Toggleterm
 function _G.set_terminal_keymaps()
   local opts = { buffer = 0 }
   vim.keymap.set("t", "<esc>", [[<C-\><C-n>]], opts)
@@ -38,8 +30,3 @@ end
 
 -- if you only want these mappings for toggle term use term://*toggleterm#* instead
 vim.cmd("autocmd! TermOpen term://* lua set_terminal_keymaps()")
-
--- Debug
-keyMap("n", "<leader>cb", "<cmd>lua require'dap'.toggle_breakpoint()<CR>")
-keyMap("n", "<leader>cs", "<cmd>lua require'dap'.step_into()<CR>")
-keyMap("n", "<leader>cc", "<cmd>lua require'dap'.continue()<CR>")
